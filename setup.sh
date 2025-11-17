@@ -18,7 +18,7 @@ ln -sfn "$PWD/nvim" "$HOME/.config/nvim"
 
 # System packages (consider running separately)
 sudo pacman -Syu
-sudo pacman -S lua-language-server base-devel fzf clang ripgrep python make openssh
+sudo pacman -S lua-language-server base-devel fzf clang ripgrep python make openssh less
 
 # Build telescope-fzf-native
 ( cd "$HOME/.local/share/nvim/lazy/telescope-fzf-native.nvim" && make )
