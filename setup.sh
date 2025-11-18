@@ -23,11 +23,18 @@ sudo pacman -S lua-language-server base-devel fzf clang ripgrep python make open
 # Build telescope-fzf-native
 ( cd "$HOME/.local/share/nvim/lazy/telescope-fzf-native.nvim" && make )
 
-read -p "Do you want rust installed? (y/n): " answer
+read -p "Do you want rust installed? (y/n): " rust_answer
 
-if [ -z $answer ]; then
+if [ -z $rust_answer ]; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
+
+read -p "Do you want hugo installed? (y/n): " hugo_answer
+
+if [ -z $hugo_answer ]; then
+  sudo pacman -S hugo
+fi
+
 
 # Configure git 
 mkdir -p "$HOME/.ssh"
