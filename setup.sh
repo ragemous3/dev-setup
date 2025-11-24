@@ -18,21 +18,21 @@ ln -sfn "$PWD/nvim" "$HOME/.config/nvim"
 
 echo "Updating pacman and installing packages"
 sudo pacman -Syu
-sudo pacman -S lua-language-server base-devel fzf clang ripgrep python make openssh less
-
+sudo pacman -S lua-language-server base-devel fzf clang ripgrep python make openssh less npm lsof
+npm i -g vscode-langservers-extracted
 # Build telescope-fzf-native
 ( cd "$HOME/.local/share/nvim/lazy/telescope-fzf-native.nvim" && make )
 
-read -p "Do you want rust installed? (y/n): " rust_answer
+read -p "Do you want Rust installed? (y/n): " rust_answer
 
-if [ -z $rust_answer ]; then
+if [ "$rust_answer" = "y" ]; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
-read -p "Do you want hugo installed? (y/n): " hugo_answer
+read -p "Do you want Hugo installed? (y/n): " hugo_answer
 
-if [ -z $hugo_answer ]; then
-  sudo pacman -S hugo
+if [ "$hugo_answer" = "y" ]; then
+  sudo pacman -S hugo go
 fi
 
 

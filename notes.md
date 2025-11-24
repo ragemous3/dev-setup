@@ -8,6 +8,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ## Lsp's
 
+[All lsps included in nvin-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.txt)
+
+
 ``` 
 sudo pacman -S lua-language-server
 ```
@@ -27,3 +30,5 @@ make
 
 - v% 
 Marks everything from start to finish (can be combined with yank or delete etc)
+
+
