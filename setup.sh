@@ -35,6 +35,11 @@ if [ "$hugo_answer" = "y" ]; then
   sudo pacman -S hugo go
 fi
 
+read -p "Do you want typescript installed? (y/n): " typescript_answer
+
+if [ "$typescript_answer" ]; then
+  sudo pacman -S typescript typescript-language-server
+fi
 
 # Configure git 
 mkdir -p "$HOME/.ssh"
