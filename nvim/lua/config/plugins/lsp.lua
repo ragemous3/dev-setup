@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
       {
 	"folke/lazydev.nvim",
 	opts = {
@@ -12,9 +13,10 @@ return {
       },
     },
     config = function()
-      require'config.lsps.eslint'
-      require'config.lsps.typescript-language-server'
-      require'config.lsps.lua'
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      require('config.lsps.eslint').setup(capabilities)
+      require('config.lsps.typescript-language-server').setup(capabilities)
+      require('config.lsps.lua').setup(capabilities)
 
       vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)

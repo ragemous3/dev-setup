@@ -46,6 +46,9 @@ Marks everything from start to finish (can be combined with yank or delete etc)
 - CTRL + . 
 Copies a whole block of code and inserts it again.
 
+- gd
+Go to definition (might require you to have the correct LSP installed)
+
 ## Oil
 
 Press `g.` to show hidden files.
