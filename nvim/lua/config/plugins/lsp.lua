@@ -26,7 +26,7 @@ return {
 	  local opts = { buffer = args.buf, silent = true }
 
 	  -- Common mappings for all LSPs
-	  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	  vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions)
 	  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 	  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
