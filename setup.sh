@@ -19,7 +19,9 @@ ln -sfn "$PWD/nvim" "$HOME/.config/nvim"
 echo "Updating pacman and installing packages"
 sudo pacman -Syu
 sudo pacman -S lua-language-server base-devel fzf clang ripgrep python make openssh less npm lsof
-npm i -g vscode-langservers-extracted
+npm i -g vscode-langservers-extracted eslint_d
+# This above vscode and eslint is for nvim. The eslint_d is a global daemon for eslint so formatting is faster. 
+
 # Build telescope-fzf-native
 ( cd "$HOME/.local/share/nvim/lazy/telescope-fzf-native.nvim" && make )
 
