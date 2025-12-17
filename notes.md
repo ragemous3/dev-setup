@@ -52,3 +52,19 @@ Go to definition (might require you to have the correct LSP installed)
 ## Oil
 
 Press `g.` to show hidden files.
+
+
+## Javascript linters and formatters
+
+Using prettier as a formatter and eslint for linting js and ts (UNDER CONSTRUCTION)
+
+Requires the below dependencies:
+```
+npm install --save-dev --legacy-peer-deps \
+  eslint \
+  @eslint/js \
+  @typescript-eslint/parser \
+  @typescript-eslint/eslint-plugin \
+  prettier \
+  eslint-config-prettier
+```
