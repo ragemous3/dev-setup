@@ -11,6 +11,13 @@ vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
 vim.keymap.set('n', '<space>asq', ':%s/"/\'/g<CR>')
 local job_id = 0
+
+-- To control the size of a window using keyboard..
+vim.keymap.set("n", "<C-l>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-h>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<C-k>", ":resize -2<CR>")
+vim.keymap.set("n", "<C-j>", ":resize +2<CR>")
+
 vim.keymap.set('n', '<space>to', function()
   vim.cmd.vnew()
   vim.cmd.term()
@@ -59,23 +66,24 @@ vim.keymap.set("n", "<space>d", function()
 end, { desc = "Show diagnostics in floating window" })
 vim.diagnostic.config({
   virtual_text = false,
-  signs = true, -- keep signs in the gutter
+  signs = true,     -- keep signs in the gutter
   float = { border = "rounded" },
   underline = true, -- underline the problematic code
   update_in_insert = false,
 })
-
-if vim.fn.has('wsl') == 1 then
-  vim.g.clipboard = {
-    name = 'WslClipboard',
-    copy = {
-      ['+'] = 'clip.exe',
-      ['*'] = 'clip.exe',
-    },
-    paste = {
-      ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-      ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    },
-    cache_enabled = 0,
-  }
-end
+--
+-- if vim.fn.has('wsl') == 1 then
+--   vim.g.clipboard = {
+  --     name = 'WslClipboard',
+  --     copy = {
+    --       ['+'] = 'clip.exe',
+    --       ['*'] = 'clip.exe',
+    --     },
+    --     paste = {
+      --       ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      --       ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      --     },
+      --     cache_enabled = 0,
+      --   }
+      -- end
+      --

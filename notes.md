@@ -68,3 +68,8 @@ npm install --save-dev --legacy-peer-deps \
   prettier \
   eslint-config-prettier
 ```
+
+
+## Commenting in nvim
+
+Using "numToStr/Comment.nvim" plugin one can mark a block of text and click gc to comment!

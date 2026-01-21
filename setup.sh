@@ -43,6 +43,12 @@ if [ "$typescript_answer" ]; then
   sudo pacman -S typescript typescript-language-server
 fi
 
+read -p "Do you want python installed? (y/n): " typescript_answer
+
+if [ "$typescript_answer" ]; then
+  sudo pacman -S python python-pip
+fi
+
 # Configure git 
 mkdir -p "$HOME/.ssh"
 if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
