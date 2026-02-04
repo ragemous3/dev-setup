@@ -46,7 +46,7 @@ fi
 read -p "Do you want python installed? (y/n): " typescript_answer
 
 if [ "$typescript_answer" ]; then
-  sudo pacman -S python python-pip
+  sudo pacman -S python python-pipx
 fi
 
 # Configure git 
