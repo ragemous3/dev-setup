@@ -58,6 +58,8 @@ ask_and_run "Python" \
 
 ask_and_run "Snap" \ 
   ( "git clone https://aur.archlinux.org/snapd.git \
+pacman -S squashfs-tools \
+apparmor \
 cd snapd \
 makepkg -si \
 sudo systemctl enable --now snapd.socket )"
