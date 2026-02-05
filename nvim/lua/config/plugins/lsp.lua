@@ -17,6 +17,7 @@ return {
       require('config.lsps.eslint').setup(capabilities)
       require('config.lsps.typescript-language-server').setup(capabilities)
       require('config.lsps.lua').setup(capabilities)
+      require('config.lsps.marksman').setup(capabilities)
 
       vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
@@ -30,8 +31,6 @@ return {
 	  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 	  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-
-
 
 	  if vim.bo.filetype == "lua" then
 	    -- Format the current buffer on save

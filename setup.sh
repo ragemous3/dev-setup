@@ -58,22 +58,30 @@ ask_and_run "Python" \
 
 ask_and_run "Snap" \ 
   ( "git clone https://aur.archlinux.org/snapd.git \
-pacman -S squashfs-tools \
+sudo pacman -S squashfs-tools \
 apparmor \
 cd snapd \
 makepkg -si \
 sudo systemctl enable --now snapd.socket )"
 
-ask_and_run "Snap Confinement (security)" \
+ask_and_run "Snap Confinement (security, does not work in WSL2.0)" \
   ( "sudo systemctl enable --now snapd.apparmor.service" )
-
+-- https://snapcraft.io/docs/installing-snap-on-arch-linux
 
 # Configure git 
 mkdir -p "$HOME/.ssh"
 if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
   ssh-keygen -t ed25519 -C "$2"
 fi
+echo "Setting snap packages"
+-- https://github.com/artempyanykh/marksman/blob/main/docs/install.md
 
+ask_and_run "Marksman lsp" \ 
+  "sudo snap install marksman"
+
+
+
+echo "Setting git config"
 git config --global user.name "$1"
 git config --global user.email "$2"
 git config --global core.editor nvim
