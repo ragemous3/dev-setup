@@ -1,9 +1,15 @@
+## In order for setup to work
+
+Symlink from .bashprofile to ~/.bash_profile and nvim to ~/.config/nvim needed in order for this setup to work.
+
 ## What to install
 
-```
-sudo pacman -S base-devel fzf clang ripgrep python make /
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+Use the `setup.sh` bash script.
 
+## Nvim clipboard to work
+
+```bash
+sudo pacman -S wl-clipboard
 ```
 
 ## Lsp's
@@ -73,3 +79,5 @@ npm install --save-dev --legacy-peer-deps \
 ## Commenting in nvim
 
 Using "numToStr/Comment.nvim" plugin one can mark a block of text and click gc to comment!
+
+

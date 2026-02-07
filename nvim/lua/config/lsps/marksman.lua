@@ -4,7 +4,17 @@
 return {
   setup = function(capabilities)
     vim.lsp.config["marksman"] = {
-      capabilities = capabilities
+      capabilities = capabilities,
+      markdown = {
+	exclude = {
+	  "node_modules",
+	  ".git",
+	  "public",
+	  "dist",
+	  "build",
+	  ".next"
+	}
+      }
     }
     vim.lsp.enable("marksman");
   end,

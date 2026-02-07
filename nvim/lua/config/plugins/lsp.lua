@@ -18,6 +18,7 @@ return {
       require('config.lsps.typescript-language-server').setup(capabilities)
       require('config.lsps.lua').setup(capabilities)
       require('config.lsps.marksman').setup(capabilities)
+      require('config.lsps.ltex-ls-plus').setup(capabilities)
 
       vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
@@ -25,12 +26,12 @@ return {
 	  if not c then return end
 
 	  local opts = { buffer = args.buf, silent = true }
-
-	  -- Common mappings for all LSPs
 	  vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions)
 	  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 	  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+	  -- Below ca is autocomplete based on suggested code actions
+	  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code actions" })
 
 	  if vim.bo.filetype == "lua" then
 	    -- Format the current buffer on save

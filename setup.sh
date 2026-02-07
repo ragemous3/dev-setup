@@ -56,6 +56,9 @@ ask_and_run "Typescript" \
 ask_and_run "Python" \ 
   "sudo pacman -S python"
 
+ask_and_run "Marksman lsp" \ 
+  "sudo pacman -S marksman"
+
 ask_and_run "Snap" \ 
   ( "git clone https://aur.archlinux.org/snapd.git \
 sudo pacman -S squashfs-tools \
@@ -75,11 +78,6 @@ if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
 fi
 echo "Setting snap packages"
 -- https://github.com/artempyanykh/marksman/blob/main/docs/install.md
-
-ask_and_run "Marksman lsp" \ 
-  "sudo snap install marksman"
-
-
 
 echo "Setting git config"
 git config --global user.name "$1"
