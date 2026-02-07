@@ -31,7 +31,7 @@ return {
 	  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 	  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 	  -- Below ca is autocomplete based on suggested code actions
-	  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code actions" })
+	  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code actions" }, opts)
 
 	  if vim.bo.filetype == "lua" then
 	    -- Format the current buffer on save

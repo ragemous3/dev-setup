@@ -4,17 +4,12 @@
 return {
   setup = function(capabilities)
     vim.lsp.config["marksman"] = {
+      filetypes = { "markdown" },
       capabilities = capabilities,
-      markdown = {
-	exclude = {
-	  "node_modules",
-	  ".git",
-	  "public",
-	  "dist",
-	  "build",
-	  ".next"
-	}
-      }
+      -- Optional debounce to reduce startup pressure
+      flags = {
+	debounce_text_changes = 500,
+      },
     }
     vim.lsp.enable("marksman");
   end,
