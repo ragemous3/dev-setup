@@ -20,11 +20,12 @@ return {
 	lua = { "stylua" },
 	python = { "isort", "black" },
       },
-      format_on_save = {
-	lsp_fallback = true,
-	async = true,
-	timeout_ms = 2500
-      },
+      format_on_save = function()
+	return {
+	  lsp_fallback = true,
+	  timeout_ms = 2500,
+	}
+      end,
     })
   end,
 }

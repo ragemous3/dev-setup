@@ -57,7 +57,7 @@ ask_and_run "Python" \
   "sudo pacman -S python"
 
 ask_and_run "Marksman lsp" \ 
-  "sudo pacman -S marksman"
+  "sudo pacman -S marksman dotnet-sdk"
 
 ask_and_run "Snap" \ 
   ( "git clone https://aur.archlinux.org/snapd.git \

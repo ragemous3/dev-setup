@@ -80,4 +80,6 @@ npm install --save-dev --legacy-peer-deps \
 
 Using "numToStr/Comment.nvim" plugin one can mark a block of text and click gc to comment!
 
+## Open issues:
 
+https://github.com/artempyanykh/marksman/issues/454
