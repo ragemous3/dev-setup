@@ -6,7 +6,7 @@ return {
       settings = {
 	ltex = {
 	  language = "en-GB",
-	  enabled = { "asciidoc", "bib", "context", "gitcommit", "html", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "latex", "text", "typst", "xhtml" }
+	  enabled = { "asciidoc", "bib", "context", "gitcommit", "markdown", "org", "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst", "tex", "latex", "text", "typst", "xhtml" }
 	},
       },
     }

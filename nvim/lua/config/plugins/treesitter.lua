@@ -3,13 +3,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      require'nvim-treesitter.configs'.setup {
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "rust" },
+      require 'nvim-treesitter.configs'.setup {
+	ensure_installed = { "c", "lua", "vim", "gotmpl", "vimdoc", "query", "markdown", "markdown_inline", "rust" },
 	auto_install = false,
 	highlight = {
 	  enable = true,
 	  disable = function(lang, buf)
-	    local max_filesize = 100 * 1024 -- 100 KB
+	    local max_filesize = 100 * 1024 -- 100 kb
 	    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 	    if ok and stats and stats.size > max_filesize then
 	      return true
@@ -18,6 +18,14 @@ return {
 	  additional_vim_regex_highlighting = false,
 	},
       }
+
+      -- for Treesitter to also work for HUGO html files
+      vim.filetype.add({
+	pattern = {
+	  [".*/layouts/.*%.html"] = "gotmpl",
+	  [".*/themes/.*%.html"] = "gotmpl",
+	},
+      })
     end,
   }
 }

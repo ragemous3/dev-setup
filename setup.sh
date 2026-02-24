@@ -47,8 +47,9 @@ npm i -g vscode-langservers-extracted eslint_d
 ask_and_run "Rust" \ 
   "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
 
+# Installing prettiern and prettier plugin go template for formatting html files
 ask_and_run "Hugo" \ 
-  "sudo pacman -S hugo go"
+  "sudo pacman -S hugo go && npm i -g prettier prettier-plugin-go-template"
 
 ask_and_run "Typescript" \ 
   "sudo pacman -S typescript typescript-language-server"

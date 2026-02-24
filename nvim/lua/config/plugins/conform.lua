@@ -9,6 +9,7 @@ return {
 	javascript = { "prettier" },
 	typescript = { "prettier" },
 	javascriptreact = { "prettier" },
+	gotmpl = { "prettier" },
 	typescriptreact = { "prettier" },
 	svelte = { "prettier" },
 	css = { "prettier" },
