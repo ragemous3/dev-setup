@@ -18,14 +18,6 @@ return {
 	  additional_vim_regex_highlighting = false,
 	},
       }
-
-      -- for Treesitter to also work for HUGO html files
-      vim.filetype.add({
-	pattern = {
-	  [".*/layouts/.*%.html"] = "gotmpl",
-	  [".*/themes/.*%.html"] = "gotmpl",
-	},
-      })
     end,
   }
 }

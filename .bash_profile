@@ -10,3 +10,8 @@ export PATH="$PATH:/root/.local/bin"
 ## Then put it into below path and the tar -xzv ...the-tar.. 
 export PATH="/opt/ltex-ls-plus/bin:$PATH"
 
+if [ -d /mnt/wslg/runtime-dir ]; then
+    echo "changing XDG_RUNTIME_DIR"
+    export XDG_RUNTIME_DIR=/mnt/wslg/runtime-dir
+    export WAYLAND_DISPLAY=wayland-0
+fi

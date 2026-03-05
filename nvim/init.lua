@@ -1,5 +1,5 @@
 require('config.lazy')
-
+-- MIght need to implement some more here: https://medium.com/unixification/must-have-neovim-keymaps-51c283394070
 vim.opt.shiftwidth = 2
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.number = true
@@ -13,10 +13,10 @@ vim.keymap.set('n', '<space>asq', ':%s/"/\'/g<CR>')
 local job_id = 0
 
 -- To control the size of a window using keyboard..
-vim.keymap.set("n", "<C-l>", ":vertical resize -2<CR>")
-vim.keymap.set("n", "<C-h>", ":vertical resize +2<CR>")
-vim.keymap.set("n", "<C-k>", ":resize -2<CR>")
-vim.keymap.set("n", "<C-j>", ":resize +2<CR>")
+vim.keymap.set("n", "<C-Right>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<C-Up>", ":resize -2<CR>")
+vim.keymap.set("n", "<C-Down>", ":resize +2<CR>")
 
 vim.keymap.set('n', '<space>to', function()
   vim.cmd.vnew()
