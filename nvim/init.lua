@@ -71,3 +71,7 @@ vim.diagnostic.config({
   underline = true, -- underline the problematic code
   update_in_insert = false,
 })
+
+-- so that i do not jump out of visual mode when indenting
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })

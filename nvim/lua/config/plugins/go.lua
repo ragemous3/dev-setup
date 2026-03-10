@@ -2,11 +2,11 @@
 return {
   "mattn/vim-gotmpl",
   ft = "gohtmltmpl",
-  config = function()
+  init = function()
     -- for HUGO html files
     vim.filetype.add({
       pattern = {
-	[".*/layouts/**/.*%.html"] = "gohtmltmpl",
+	[".*/layouts/.+%.html"] = "gohtmltmpl",
       },
     })
   end,
