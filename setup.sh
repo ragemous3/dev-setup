@@ -60,6 +60,9 @@ ask_and_run "Python" \
 ask_and_run "Marksman lsp" \ 
   "sudo pacman -S marksman dotnet-sdk"
 
+ask_and_run "Codex CLI" \ 
+  "npm i -g @openai/codex"
+
 ask_and_run "Snap" \ 
   ( "git clone https://aur.archlinux.org/snapd.git \
 sudo pacman -S squashfs-tools \
