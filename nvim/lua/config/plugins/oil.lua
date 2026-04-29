@@ -1,21 +1,15 @@
 return {
   {
-    'stevearc/oil.nvim',
-    ---@module 'oil'
-    ---@type oil.SetupOpts
+    "stevearc/oil.nvim",
+    lazy = false,
+    --    dependencies = { { "nvim-mini/mini.icons", opts = {} } }, -- optional
     opts = {
-      delete_to_trash = true
+      delete_to_trash = true,
+      keymaps = {
+	["yc"] = "actions.copy_to_system_clipboard",
+	["yp"] = "actions.paste_from_system_clipboard",
+	["ym"] = { "actions.paste_from_system_clipboard", opts = { delete_original = true } },
+      },
     },
-    config = function()
-      local conform = require("oil")
-
-      conform.setup({
-	delete_to_trash = true
-      })
-
-      -- Optional dependencies
-      -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
-      -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-    end,
-  }
+  },
 }

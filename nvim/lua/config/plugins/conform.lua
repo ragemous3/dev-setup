@@ -22,7 +22,10 @@ return {
 	lua = { "stylua" },
 	python = { "isort", "black" },
       },
-      format_on_save = function()
+      format_on_save = function(bufnr)
+	if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "oil" then
+	  return
+	end
 	return {
 	  lsp_fallback = true,
 	  timeout_ms = 2500,

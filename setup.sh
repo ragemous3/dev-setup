@@ -51,6 +51,9 @@ ask_and_run "Rust" \
 ask_and_run "Hugo" \ 
   "sudo pacman -S hugo go && npm i -g prettier prettier-plugin-go-template"
 
+ask_and_run "Nvm" \ 
+  "sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
+
 ask_and_run "Typescript" \ 
   "sudo pacman -S typescript typescript-language-server"
 
