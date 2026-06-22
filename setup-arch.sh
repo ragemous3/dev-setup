@@ -35,13 +35,12 @@ ln -sfn "$PWD/nvim" "$HOME/.config/nvim"
 
 echo "Updating pacman and installing packages"
 sudo pacman -Syu
-sudo pacman -S lua-language-server base-devel fzf clang ripgrep python make openssh less npm lsof
+sudo pacman -S neovim lua-language-server base-devel fzf clang ripgrep python make openssh less npm lsof
 
 npm i -g vscode-langservers-extracted eslint_d
 # The eslint_d is a global daemon for eslint so formatting is faster.
 
-# Build telescope-fzf-native - its for multigrep search
-( cd "$HOME/.local/share/nvim/lazy/telescope-fzf-native.nvim" && make )
+# Build telescope-fzf-native - see post-setup-arch.sh
 
 ask_and_run "Rust" \
   "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"

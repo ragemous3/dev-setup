@@ -34,13 +34,24 @@ ln -sfn "$PWD/nvim" "$HOME/.config/nvim"
 
 echo "Updating apt and installing packages"
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y lua-language-server build-essential fzf clang ripgrep python3 make openssh-client less npm lsof
+sudo apt install -y build-essential fzf clang ripgrep python3 make openssh-client less npm lsof
+
+# Install latest stable Neovim from GitHub (Ubuntu repos are too old)
+curl -Lo /tmp/nvim-linux-x86_64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+sudo rm -rf /opt/nvim-linux-x86_64
+sudo tar xzf /tmp/nvim-linux-x86_64.tar.gz -C /opt
+sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+rm /tmp/nvim-linux-x86_64.tar.gz
+
+# lua-language-server is not in Ubuntu repos, install from GitHub
+mkdir -p "$HOME/.local/lua-language-server"
+curl -L https://github.com/LuaLS/lua-language-server/releases/download/3.18.2/lua-language-server-3.18.2-linux-x64.tar.gz | tar xz -C "$HOME/.local/lua-language-server"
+ln -sf "$HOME/.local/lua-language-server/bin/lua-language-server" "$HOME/.local/bin/lua-language-server"
 
 npm i -g vscode-langservers-extracted eslint_d
 # The eslint_d is a global daemon for eslint so formatting is faster.
 
-# Build telescope-fzf-native - its for multigrep search
-( cd "$HOME/.local/share/nvim/lazy/telescope-fzf-native.nvim" && make )
+# Build telescope-fzf-native - see post-setup-ubuntu.sh
 
 ask_and_run "Rust" \
   "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
