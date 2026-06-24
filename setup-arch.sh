@@ -37,8 +37,16 @@ echo "Updating pacman and installing packages"
 sudo pacman -Syu
 sudo pacman -S neovim lua-language-server base-devel fzf clang ripgrep python make openssh less npm lsof
 
-npm i -g vscode-langservers-extracted eslint_d
+npm i -g vscode-langservers-extracted eslint_d typescript typescript-language-server pyright
 # The eslint_d is a global daemon for eslint so formatting is faster.
+
+# ltex-ls-plus (grammar/spell checking LSP)
+curl -L https://github.com/ltex-plus/ltex-ls-plus/releases/download/18.7.0/ltex-ls-plus-18.7.0-linux-x64.tar.gz -o /tmp/ltex-ls-plus.tar.gz
+sudo rm -rf /opt/ltex-ls-plus
+sudo mkdir -p /opt/ltex-ls-plus
+sudo tar xzf /tmp/ltex-ls-plus.tar.gz -C /opt --no-same-owner --no-same-permissions
+sudo mv /opt/ltex-ls-plus-18.7.0/* /opt/ltex-ls-plus/ 2>/dev/null || sudo mv /opt/ltex-ls-plus-*/* /opt/ltex-ls-plus/ 2>/dev/null
+rm /tmp/ltex-ls-plus.tar.gz
 
 # Build telescope-fzf-native - see post-setup-arch.sh
 
@@ -53,10 +61,10 @@ ask_and_run "Nvm" \
   "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
 
 ask_and_run "Typescript" \
-  "sudo pacman -S typescript typescript-language-server"
+  "sudo pacman -S typescript"
 
 ask_and_run "Python" \
-  "sudo pacman -S python && npm i -g pyright"
+  "sudo pacman -S python"
 
 ask_and_run "Marksman lsp" \
   "sudo pacman -S marksman dotnet-sdk"

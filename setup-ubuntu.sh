@@ -48,8 +48,16 @@ mkdir -p "$HOME/.local/lua-language-server"
 curl -L https://github.com/LuaLS/lua-language-server/releases/download/3.18.2/lua-language-server-3.18.2-linux-x64.tar.gz | tar xz -C "$HOME/.local/lua-language-server"
 ln -sf "$HOME/.local/lua-language-server/bin/lua-language-server" "$HOME/.local/bin/lua-language-server"
 
-npm i -g vscode-langservers-extracted eslint_d
+npm i -g vscode-langservers-extracted eslint_d typescript typescript-language-server pyright
 # The eslint_d is a global daemon for eslint so formatting is faster.
+
+# ltex-ls-plus (grammar/spell checking LSP)
+curl -L https://github.com/ltex-plus/ltex-ls-plus/releases/download/18.7.0/ltex-ls-plus-18.7.0-linux-x64.tar.gz -o /tmp/ltex-ls-plus.tar.gz
+sudo rm -rf /opt/ltex-ls-plus
+sudo mkdir -p /opt/ltex-ls-plus
+sudo tar xzf /tmp/ltex-ls-plus.tar.gz -C /opt --no-same-owner --no-same-permissions
+sudo mv /opt/ltex-ls-plus-18.7.0/* /opt/ltex-ls-plus/ 2>/dev/null || sudo mv /opt/ltex-ls-plus-*/* /opt/ltex-ls-plus/ 2>/dev/null
+rm /tmp/ltex-ls-plus.tar.gz
 
 # Build telescope-fzf-native - see post-setup-ubuntu.sh
 
@@ -64,10 +72,10 @@ ask_and_run "Nvm" \
   "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
 
 ask_and_run "Typescript" \
-  "sudo apt install -y node-typescript && npm i -g typescript-language-server"
+  "sudo apt install -y node-typescript"
 
 ask_and_run "Python" \
-  "sudo apt install -y python3 python3-pip && npm i -g pyright"
+  "sudo apt install -y python3 python3-pip"
 
 ask_and_run "Marksman lsp" \
   "sudo apt install -y dotnet-sdk-8.0 && sudo snap install marksman"
