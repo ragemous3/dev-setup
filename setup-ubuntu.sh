@@ -67,7 +67,7 @@ ask_and_run "Typescript" \
   "sudo apt install -y node-typescript && npm i -g typescript-language-server"
 
 ask_and_run "Python" \
-  "sudo apt install -y python3 python3-pip"
+  "sudo apt install -y python3 python3-pip && npm i -g pyright"
 
 ask_and_run "Marksman lsp" \
   "sudo apt install -y dotnet-sdk-8.0 && sudo snap install marksman"

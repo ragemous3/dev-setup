@@ -19,6 +19,7 @@ return {
       require('config.lsps.lua').setup(capabilities)
       require('config.lsps.marksman').setup(capabilities)
       require('config.lsps.ltex-ls-plus').setup(capabilities)
+      require('config.lsps.pyright').setup(capabilities)
 
       vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)

@@ -56,7 +56,7 @@ ask_and_run "Typescript" \
   "sudo pacman -S typescript typescript-language-server"
 
 ask_and_run "Python" \
-  "sudo pacman -S python"
+  "sudo pacman -S python && npm i -g pyright"
 
 ask_and_run "Marksman lsp" \
   "sudo pacman -S marksman dotnet-sdk"
