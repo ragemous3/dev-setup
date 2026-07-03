@@ -16,11 +16,11 @@ sudo pacman -S wl-clipboard
 
 [All lsps included in nvin-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.txt)
 
-``` 
+```
 sudo pacman -S lua-language-server
 ```
 
-Run `:help lspconfig-all` to get help on certain configurations for certain lsps. 
+Run `:help lspconfig-all` to get help on certain configurations for certain lsps.
 
 ### Eslint
 
@@ -31,40 +31,46 @@ Project needs a eslint configuration file to work and also the npm packages inst
     "@typescript-eslint/parser": "^8.48.0",
     "typescript-eslint": "^8.48.0"
 
+## General useful commands
 
+Copy directly to clipboard.
 
-## Plugins good to know
+```
+ cat ~/.ssh/id_ed25519.pub | xclip -selection clipboard
+```
+
+## Nvim Plugins good to know
 
 ### Telescope
 
 Need to run the below to make fzf search work (that is after including it).
+
 ```
 cd ~/.local/share/nvim/lazy/telescope-fzf-native.nvim\
 make
 ```
 
-
 ## Commands
 
-- v% 
-Marks everything from start to finish (can be combined with yank or delete etc)
+- v%
+  Marks everything from start to finish (can be combined with yank or delete etc)
 
-- CTRL + . 
-Copies a whole block of code and inserts it again.
+- CTRL + .
+  Copies a whole block of code and inserts it again.
 
 - gd
-Go to definition (might require you to have the correct LSP installed)
+  Go to definition (might require you to have the correct LSP installed)
 
 ## Oil
 
 Press `g.` to show hidden files.
-
 
 ## Javascript linters and formatters
 
 Using prettier as a formatter and eslint for linting js and ts (UNDER CONSTRUCTION)
 
 Requires the below dependencies:
+
 ```
 npm install --save-dev --legacy-peer-deps \
   eslint \
@@ -74,7 +80,6 @@ npm install --save-dev --legacy-peer-deps \
   prettier \
   eslint-config-prettier
 ```
-
 
 ## Commenting in nvim
 
