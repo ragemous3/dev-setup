@@ -67,9 +67,8 @@ ensure_opt_access() {
 }
 
 install_marksman() {
-  sudo apt install -y dotnet-sdk-8.0 snapd
-  sudo systemctl enable --now snapd.socket
-  sudo snap install marksman
+  curl -L https://github.com/artempyanykh/marksman/releases/download/2026-02-08/marksman-linux-x64 -o "$HOME/.local/bin/marksman"
+  chmod +x "$HOME/.local/bin/marksman"
 }
 
 echo "Adding profile and editor configuration"

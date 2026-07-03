@@ -72,6 +72,29 @@ vim.diagnostic.config({
   update_in_insert = false,
 })
 
+local function reload_lsp_clients(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+
+  local client_names = {}
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+    if client.name then
+      table.insert(client_names, client.name)
+    end
+  end
+
+  if #client_names == 0 then
+    vim.notify("No LSP clients attached to this buffer", vim.log.levels.WARN)
+    return
+  end
+
+  vim.lsp.enable(client_names, false)
+  vim.lsp.enable(client_names)
+end
+
+vim.api.nvim_create_user_command("LspReload", function()
+  reload_lsp_clients(0)
+end, { desc = "Restart LSP clients attached to the current buffer" })
+
 -- so that i do not jump out of visual mode when indenting
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })

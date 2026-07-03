@@ -4,11 +4,10 @@
 return {
   setup = function(capabilities)
     vim.lsp.config["marksman"] = {
-      filetypes = { "markdown" },
+      cmd = { vim.fn.expand("~/.local/bin/marksman"), "server" },
+      filetypes = { "markdown", "markdown.mdx" },
+      root_markers = { ".marksman.toml", ".git" },
       capabilities = capabilities,
-      flags = {
-	debounce_text_changes = 500,
-      },
     }
     vim.lsp.enable("marksman");
   end,

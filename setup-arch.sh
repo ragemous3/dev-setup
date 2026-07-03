@@ -116,7 +116,7 @@ ask_and_run "Python" \
   "sudo pacman -S --needed --noconfirm python"
 
 ask_and_run "Marksman lsp" \
-  "sudo pacman -S --needed --noconfirm marksman dotnet-sdk"
+  "curl -L https://github.com/artempyanykh/marksman/releases/download/2026-02-08/marksman-linux-x64 -o \"\$HOME/.local/bin/marksman\" && chmod +x \"\$HOME/.local/bin/marksman\""
 
 ask_and_run "Codex CLI" \
   "install_codex_cli"
