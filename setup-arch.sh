@@ -15,6 +15,8 @@ if [ -z "${2:-}" ]; then
   exit 1
 fi
 
+LTEX_LS_PLUS_VERSION="18.7.0"
+
 ask_and_run() {
   local message="$1"
   local cmd="$2"
@@ -67,6 +69,23 @@ ensure_opt_access() {
   sudo install -d -o root -g root -m 755 /opt
 }
 
+install_ltex_ls_plus() {
+  local archive="/tmp/ltex-ls-plus-${LTEX_LS_PLUS_VERSION}.tar.gz"
+  local extract_dir
+  extract_dir="$(mktemp -d)"
+
+  curl -L "https://github.com/ltex-plus/ltex-ls-plus/releases/download/${LTEX_LS_PLUS_VERSION}/ltex-ls-plus-${LTEX_LS_PLUS_VERSION}-linux-x64.tar.gz" -o "$archive"
+  ensure_opt_access
+  tar xzf "$archive" -C "$extract_dir"
+  sudo rm -rf /opt/ltex-ls-plus
+  sudo install -d -o root -g root -m 755 /opt/ltex-ls-plus
+  sudo cp -a "$extract_dir/ltex-ls-plus-${LTEX_LS_PLUS_VERSION}/." /opt/ltex-ls-plus/
+  sudo chmod -R a+rX /opt/ltex-ls-plus
+  rm -rf "$archive" "$extract_dir"
+  ln -sf /opt/ltex-ls-plus/bin/ltex-ls-plus "$HOME/.local/bin/ltex-ls-plus"
+  ltex-ls-plus --version >/dev/null
+}
+
 echo "Adding profile and editor configuration"
 
 link_managed_symlink "$PWD/.bash_profile" "$HOME/.bash_profile"
@@ -76,7 +95,7 @@ export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 
 echo "Updating pacman and installing packages"
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm neovim lua-language-server base-devel curl fzf clang git ripgrep python make openssh less lsof tar gzip
+sudo pacman -S --needed --noconfirm neovim lua-language-server stylua base-devel curl fzf clang git ripgrep python make openssh less lsof tar gzip
 hash -r
 
 echo "Installing nvm and latest Node LTS"
@@ -93,15 +112,7 @@ npm i -g vscode-langservers-extracted eslint_d typescript typescript-language-se
 # The eslint_d is a global daemon for eslint so formatting is faster.
 
 # ltex-ls-plus (grammar/spell checking LSP)
-curl -L https://github.com/ltex-plus/ltex-ls-plus/releases/download/18.7.0/ltex-ls-plus-18.7.0-linux-x64.tar.gz -o /tmp/ltex-ls-plus.tar.gz
-ensure_opt_access
-sudo rm -rf /opt/ltex-ls-plus
-sudo mkdir -p /opt/ltex-ls-plus
-sudo tar xzf /tmp/ltex-ls-plus.tar.gz -C /opt --no-same-owner --no-same-permissions
-sudo mv /opt/ltex-ls-plus-18.7.0/* /opt/ltex-ls-plus/ 2>/dev/null || sudo mv /opt/ltex-ls-plus-*/* /opt/ltex-ls-plus/ 2>/dev/null
-sudo chmod -R a+rX /opt/ltex-ls-plus
-rm /tmp/ltex-ls-plus.tar.gz
-ln -sf /opt/ltex-ls-plus/bin/ltex-ls-plus "$HOME/.local/bin/ltex-ls-plus"
+install_ltex_ls_plus
 
 # Build telescope-fzf-native - see post-setup-arch.sh
 
