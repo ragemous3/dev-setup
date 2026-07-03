@@ -49,6 +49,10 @@ install_codex_cli() {
   echo "Installed caveman skill to ${CODEX_HOME:-$HOME/.codex}/skills/caveman"
 }
 
+ensure_opt_access() {
+  sudo install -d -o root -g root -m 755 /opt
+}
+
 echo "Adding profile and editor configuration"
 
 ln -sf "$PWD/.bash_profile" "$HOME/.bash_profile"
@@ -72,8 +76,10 @@ nvm use default
 
 # Install latest stable Neovim from GitHub (Ubuntu repos are too old)
 curl -Lo /tmp/nvim-linux-x86_64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+ensure_opt_access
 sudo rm -rf /opt/nvim-linux-x86_64
 sudo tar xzf /tmp/nvim-linux-x86_64.tar.gz -C /opt
+sudo chmod -R a+rX /opt/nvim-linux-x86_64
 sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
 hash -r
 rm /tmp/nvim-linux-x86_64.tar.gz
@@ -88,10 +94,12 @@ npm i -g vscode-langservers-extracted eslint_d typescript typescript-language-se
 
 # ltex-ls-plus (grammar/spell checking LSP)
 curl -L https://github.com/ltex-plus/ltex-ls-plus/releases/download/18.7.0/ltex-ls-plus-18.7.0-linux-x64.tar.gz -o /tmp/ltex-ls-plus.tar.gz
+ensure_opt_access
 sudo rm -rf /opt/ltex-ls-plus
 sudo mkdir -p /opt/ltex-ls-plus
 sudo tar xzf /tmp/ltex-ls-plus.tar.gz -C /opt --no-same-owner --no-same-permissions
 sudo mv /opt/ltex-ls-plus-18.7.0/* /opt/ltex-ls-plus/ 2>/dev/null || sudo mv /opt/ltex-ls-plus-*/* /opt/ltex-ls-plus/ 2>/dev/null
+sudo chmod -R a+rX /opt/ltex-ls-plus
 rm /tmp/ltex-ls-plus.tar.gz
 ln -sf /opt/ltex-ls-plus/bin/ltex-ls-plus "$HOME/.local/bin/ltex-ls-plus"
 
@@ -143,3 +151,5 @@ command -v npm >/dev/null
 command -v nvm >/dev/null
 command -v lua-language-server >/dev/null
 command -v ltex-ls-plus >/dev/null
+nvim --version >/dev/null
+ltex-ls-plus --version >/dev/null
