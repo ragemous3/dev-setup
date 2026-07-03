@@ -42,11 +42,24 @@ install_docker() {
   fi
 }
 
+link_managed_symlink() {
+  local source="$1"
+  local target="$2"
+
+  if [ -e "$target" ] && [ ! -L "$target" ]; then
+    echo "Cannot create symlink at $target because it already exists and is not a symlink."
+    echo "Move or remove it manually, then run this setup script again."
+    exit 1
+  fi
+
+  ln -sfnT "$source" "$target"
+}
+
 install_codex_cli() {
   curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
 
   mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-  ln -sfn "$PWD/skills/caveman" "${CODEX_HOME:-$HOME/.codex}/skills/caveman"
+  link_managed_symlink "$PWD/skills/caveman" "${CODEX_HOME:-$HOME/.codex}/skills/caveman"
   echo "Installed caveman skill to ${CODEX_HOME:-$HOME/.codex}/skills/caveman"
 }
 
@@ -56,9 +69,9 @@ ensure_opt_access() {
 
 echo "Adding profile and editor configuration"
 
-ln -sf "$PWD/.bash_profile" "$HOME/.bash_profile"
+link_managed_symlink "$PWD/.bash_profile" "$HOME/.bash_profile"
 mkdir -p "$HOME/.config" "$HOME/.local/bin"
-ln -sfn "$PWD/nvim" "$HOME/.config/nvim"
+link_managed_symlink "$PWD/nvim" "$HOME/.config/nvim"
 export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 
 echo "Updating pacman and installing packages"
