@@ -2,7 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
       {
 	"folke/lazydev.nvim",
 	opts = {
@@ -13,12 +13,13 @@ return {
       },
     },
     config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
       require('config.lsps.eslint').setup(capabilities)
       require('config.lsps.typescript-language-server').setup(capabilities)
       require('config.lsps.lua').setup(capabilities)
       require('config.lsps.marksman').setup(capabilities)
       require('config.lsps.ltex-ls-plus').setup(capabilities)
+      require('config.lsps.pyright').setup(capabilities)
 
       vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
