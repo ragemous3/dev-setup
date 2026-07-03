@@ -2,7 +2,7 @@
 
 This repo is my personal Linux development environment bootstrap. It contains
 setup scripts for Arch Linux and Ubuntu, a Neovim configuration, WSL helper
-files, optional Codex skill setup, and Docker-based smoke tests for the setup
+files, optional Codex skill setup, and Docker-based tests for the setup
 scripts.
 
 The setup scripts install core CLI tooling, Node through `nvm`, Neovim and LSP
@@ -12,7 +12,7 @@ user's home directory.
 
 ## Setup
 
-Run the script that matches the target distro:
+Run the setup script that matches the target distro:
 
 ```sh
 ./setup-arch.sh "Your Name" you@example.com
@@ -33,12 +33,12 @@ run the matching post-setup script to build `telescope-fzf-native`:
 ./post-setup-ubuntu.sh
 ```
 
-## Tests
+## Non-Interactive Smoke Tests
 
 The test scripts build a Docker image with a non-root `tester` user, mount this
 repo read-only at `/home/tester/dev-setup`, run the matching setup script with
-pre-filled prompts, and verify that the login shell can load the installed
-environment.
+pre-filled prompt answers, and verify that the login shell can load the
+installed environment.
 
 Run the Ubuntu smoke test:
 
@@ -54,14 +54,21 @@ Run the Arch smoke test:
 
 ## Interactive Docker Shell
 
-Use these commands when you want to inspect or debug the test container
-manually.
+Use these commands to start a disposable Docker shell and run a setup script
+manually. The container uses a non-root `tester` user with passwordless `sudo`
+and mounts this repo read-only at `/home/tester/dev-setup`.
 
 Ubuntu:
 
 ```sh
 docker build -f test/docker/ubuntu.Dockerfile -t dev-setup-test-ubuntu .
 docker run --rm -it -v "$PWD:/home/tester/dev-setup:ro" dev-setup-test-ubuntu bash -l
+```
+
+Inside the Ubuntu container:
+
+```sh
+./setup-ubuntu.sh "Test User" tester@example.com
 ```
 
 Arch:
@@ -71,13 +78,8 @@ docker build -f test/docker/arch.Dockerfile -t dev-setup-test-arch .
 docker run --rm -it -v "$PWD:/home/tester/dev-setup:ro" dev-setup-test-arch bash -l
 ```
 
-Inside the container, run the setup script just like the automated test does:
+Inside the Arch container:
 
 ```sh
-printf 'n\nn\nn\nn\ny\ny\nn\nn\n' | ./setup-ubuntu.sh 'Test User' tester@example.com
-./test/verify-login-shell.sh
+./setup-arch.sh "Test User" tester@example.com
 ```
-
-For Arch, replace `setup-ubuntu.sh` with `setup-arch.sh`.
-
-
