@@ -1,0 +1,4 @@
+interface:
+  display_name: "Caveman"
+  short_description: "Answer in blunt caveman style."
+  default_prompt: "Use $caveman to rewrite this in caveman style."

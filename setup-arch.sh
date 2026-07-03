@@ -42,6 +42,14 @@ install_docker() {
   fi
 }
 
+install_codex_cli() {
+  curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
+
+  mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+  ln -sfn "$PWD/skills/caveman" "${CODEX_HOME:-$HOME/.codex}/skills/caveman"
+  echo "Installed caveman skill to ${CODEX_HOME:-$HOME/.codex}/skills/caveman"
+}
+
 echo "Adding profile and editor configuration"
 
 ln -sf "$PWD/.bash_profile" "$HOME/.bash_profile"
@@ -52,6 +60,7 @@ export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 echo "Updating pacman and installing packages"
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm neovim lua-language-server base-devel curl fzf clang git ripgrep python make openssh less lsof tar gzip
+hash -r
 
 echo "Installing nvm and latest Node LTS"
 export NVM_DIR="$HOME/.nvm"
@@ -91,7 +100,7 @@ ask_and_run "Marksman lsp" \
   "sudo pacman -S --needed --noconfirm marksman dotnet-sdk"
 
 ask_and_run "Codex CLI" \
-  "curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh"
+  "install_codex_cli"
 
 ask_and_run "Docker" \
   "install_docker"

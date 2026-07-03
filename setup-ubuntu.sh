@@ -41,6 +41,14 @@ install_docker() {
   fi
 }
 
+install_codex_cli() {
+  curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
+
+  mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+  ln -sfn "$PWD/skills/caveman" "${CODEX_HOME:-$HOME/.codex}/skills/caveman"
+  echo "Installed caveman skill to ${CODEX_HOME:-$HOME/.codex}/skills/caveman"
+}
+
 echo "Adding profile and editor configuration"
 
 ln -sf "$PWD/.bash_profile" "$HOME/.bash_profile"
@@ -67,6 +75,7 @@ curl -Lo /tmp/nvim-linux-x86_64.tar.gz https://github.com/neovim/neovim/releases
 sudo rm -rf /opt/nvim-linux-x86_64
 sudo tar xzf /tmp/nvim-linux-x86_64.tar.gz -C /opt
 sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+hash -r
 rm /tmp/nvim-linux-x86_64.tar.gz
 
 # lua-language-server is not in Ubuntu repos, install from GitHub
@@ -102,7 +111,7 @@ ask_and_run "Marksman lsp" \
   "sudo apt install -y dotnet-sdk-8.0 && sudo snap install marksman"
 
 ask_and_run "Codex CLI" \
-  "curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh"
+  "install_codex_cli"
 
 ask_and_run "Docker" \
   "install_docker"

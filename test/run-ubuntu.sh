@@ -8,4 +8,4 @@ docker build -f "$repo_root/test/docker/ubuntu.Dockerfile" -t "$image_name" "$re
 docker run --rm \
   -v "$repo_root:/home/tester/dev-setup:ro" \
   "$image_name" \
-  bash -lc "printf 'n\nn\nn\nn\ny\ny\nn\nn\n' | ./setup-ubuntu.sh 'Test User' tester@example.com && ./test/verify-login-shell.sh"
+  bash -lc "printf 'n\nn\nn\nn\ny\ny\nn\nn\nn\n' | ./setup-ubuntu.sh 'Test User' tester@example.com && ./test/verify-login-shell.sh"

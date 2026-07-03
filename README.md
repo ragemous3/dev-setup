@@ -69,6 +69,8 @@ Inside the Ubuntu container:
 
 ```sh
 ./setup-ubuntu.sh "Test User" tester@example.com
+exec bash -l
+nvim
 ```
 
 Arch:
@@ -82,4 +84,6 @@ Inside the Arch container:
 
 ```sh
 ./setup-arch.sh "Test User" tester@example.com
+exec bash -l
+nvim
 ```
