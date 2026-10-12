@@ -120,3 +120,41 @@ Inside the Arch container:
 exec bash -l
 nvim
 ```
+
+## Troubleshooting
+
+### Telescope does not start / fzf config does not work
+
+Symptom: Telescope keymaps (`<leader>fd`, `<leader>fg`, etc.) do nothing and
+Telescope appears not to start.
+
+Cause: `telescope-fzf-native.nvim` ships a C extension that must be compiled
+with `make`. If that build was skipped or failed silently during plugin
+install (for example because `make`/`cc` were not yet on `PATH` — e.g. the
+conda `devtools` env was not active when `lazy.nvim` ran the build step), the
+native library `build/libfzf.so` is never produced. Telescope's `config`
+function then calls `require('telescope').load_extension('fzf')`, which throws
+because the native lib is missing. Since that error happens *inside* the
+`config` function, the rest of it aborts and none of the Telescope keymaps get
+registered — so Telescope looks like it never started.
+
+Diagnose — the build directory should contain `libfzf.so`:
+
+```sh
+ls -la ~/.local/share/nvim/lazy/telescope-fzf-native.nvim/build/
+```
+
+Fix — build the native library manually:
+
+```sh
+cd ~/.local/share/nvim/lazy/telescope-fzf-native.nvim && make
+```
+
+Or re-run the matching post-setup script, which does this for you:
+
+```sh
+./post-setup-arch.sh      # or ./post-setup-ubuntu.sh
+```
+
+Then restart Neovim. Also make sure `ripgrep` (`rg`) is installed, since the
+`<leader>fg` multigrep picker shells out to it.
