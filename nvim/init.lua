@@ -39,6 +39,13 @@ vim.keymap.set('n', '<space>tr', function()
 
   vim.fn.chansend(job_id, { current_command .. '\r\n' })
 end)
+
+-- <space>tt : open a terminal in its own fullscreen tab
+vim.keymap.set('n', '<space>tt', function()
+  vim.cmd.tabnew()
+  vim.cmd.term()
+  job_id = vim.bo.channel
+end)
 -- get into normal mode when in terminal mode
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 
